@@ -60,9 +60,28 @@
 
 #### Contrastive Pre-training
 
-GCL是图卷积编码层，一个节点的特征向量经过它将得到下一层该节点的特征向量，
+GCL是图卷积编码层，一个节点的特征向量经过它将得到下一层该节点的特征向量。**可以是不同的卷积层。**
 
 CONCAT行为是拼接加和行为，将每个节点在各层中的特征向量加和。
+
+READOUT行为是将所有节点在各层中特征的融合向量经过某种方式得到融合，获取到事件图的全局表示。**可以是不同的池化方法**
+
+**本文中使用的卷积层为GIN，而readout池化层选择均值。**
+
+对比预训练的目标是 **最大化谣言传播图数据集的互信息值。**
+
+计算方式是：
+
+![image-20210906153947645](/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210906153947645.png)
+
+其中：
+
+- $\psi$  表示 神经网络的参数集合；
+- I表示互信息评估器，T表示判别器；G表示一个输入的事件图样本，Gpos表示G的正例，Gneg表示G的负例；
+- sp 表示一个softplus函数。**它是relu函数的平滑板，其作用**
+- 
+
+
 
 
 
