@@ -32,7 +32,7 @@
 
 一个数据集由多个事件构成，一个事件由这个事件的所有post和post之间的图结构联系。而每个post的表示由一个one-hot向量构成。
 
-#### 2.1 事件增强
+#### 事件增强
 
 谣言事件的一个特征是：一个谣言的post和comments是内在联系，同时彼此独立。**因此，数据增强操作应该为其量身定制。而谣言的特点是：脆弱的事件结构和结构表示；同时 malicious users and naive users恶意用户和幼稚用户倾向于提升其传播范围，而造成了 the echo chamber effect 回声室效应在社交媒体中频繁发生。**
 
@@ -78,8 +78,28 @@ READOUT行为是将所有节点在各层中特征的融合向量经过某种方�
 
 - $\psi$  表示 神经网络的参数集合；
 - I表示互信息评估器，T表示判别器；G表示一个输入的事件图样本，Gpos表示G的正例，Gneg表示G的负例；
-- sp 表示一个softplus函数。**它是relu函数的平滑板，其作用**
-- 
+- sp 表示一个softplus函数。**它是relu函数的平滑版本。**（TODO：这里之所以使用它，是有什么考虑吗？）
+- 正例事件：使用输入事件图和生成图的样本的local patch representations；负例事件：使用一个batch中其他事件图的local patch representation。
+
+#### **更好地预测谣言的真实性**
+
+融合了对比预训练得到的互信息，想要强调的source post和textual features文字特征，以得到事件图的representations。
+
+其中textual features 是本事件的所有post的features的均值得到的一个特征向量。
+
+![image-20210907095348094](/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210907095348094.png)
+
+![image-20210907095402675](/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210907095402675.png)
+
+
+
+#### Fine tuning
+
+使用预训练的参数作为该阶段模型的初始化参数，接着用labeled data训练模型。
+
+预测的输出通过多个全连接层和一个softmax层；通过交叉熵损失函数和L2正则项得到损失值；
+
+
 
 
 
