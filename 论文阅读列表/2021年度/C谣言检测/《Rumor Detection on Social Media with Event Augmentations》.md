@@ -319,3 +319,223 @@ terms of the TF-IDF values。
 
 ### 《A Survey of Information Cascade Analysis: Models, Predictions, and Recent Advances》
 
+#### 摘要
+
+社会的发展，使得人们对信息级联演化的轨迹和结构的探索多了些兴趣；本文对信息流行度预测方法做了综述，从feature engineering and stochastic processes特征工程和随机过程，经过图表示，到深度学习方法。
+
+#### 引言
+
+理解信息如何传播，什么因素驱动着信息传播的成功，同时信息对流行度的预测等任务是比较有挑战性的，但是又很实用：病毒式营销viral marketing，广告，scientific impact quantification科学影响量化、推荐、campaign strategy竞选策略和epidemic prevention流行病预防。
+
+作者认为，是信息传播的轨迹和结构，以及信息传播中的参与者构成了所谓的信息级联。
+
+当前的业界和学术界都对信息级联的预测很有兴趣。而“预测”在不同的应用领域有不同的意义。
+
+- 预测某个博客的流行度；
+- Facebook中某个视频或图片的likes number。
+- Youtube中某个视频的浏览量；
+- 影片排名；
+- 学术论文的引用量；
+- 一个新闻的评论内容；
+
+这里的prediction，根据不同的标准有不同阐释。
+
+- 根据不同的问题，指代的是多分类、二分类或者回归问题；
+    - 预测一个集群在未来某个时刻的具体大小；
+    - 评估一个集群是否会grow超过某个阈值；
+    - **此外，从战略上讲，基于观察到的信息范围，可以在发表之前做出预测 [138] 或通过窥视早期级联进化**
+- 根据不同的分析层面，制定出不同流行度预测；
+    - 宏观层面，模型可以学习一个集群的集体性行为；
+    - 微观层面，模型可以学习到一个单独个体 对特定信息项的行为/响应（individual user actions/responses to specific information items）。
+
+在方法论的角度，有比较充足多的算法选择用以建模和预测信息级联（集群）。
+
+- 传统方法，与特定信息项相关的不同的特征（时许特征和结构性特征）可以通过特征工程feature engineering 提取。
+    - 典型的机器学习方法：线性/逻辑回归，朴素贝叶斯，SVM和决策树；
+    - 随机过程模型：泊松和霍克斯点过程。
+- 深度学习方法。
+    - Graph representation，深度walk，node2vec和图卷积网络；
+    - sequential data，RNN及其变体；
+    - 其他的深度学习diffusion model。
+
+在综述方面，有很多人做过了。
+
+- 【72，187】主要集中于不同的特征工程方法和经典的机器学习方法，用于建模预测信息项的流行度；
+- 【63，146】专注于网络内容或者microblog information diffusion微博信息传播，**同时强调信息级联建模的不同方面。**
+
+比如，【146】面向网络内容的流行度预测，综述了先验和后验的预测方法，同时综述了验证协议evaluation protocols和分类回归方法
+
+本文综述的特点是：
+
+- 更加广阔的视角：从对线上网络内容的建模到对信息更加泛化的定义（可以在任何网络中propagate的任何可以衡量的实体）
+- 更大范围的网络和集群：涉及更多类型的网络，而非仅仅是单一的社交网络；
+- 对建模方法更加广泛的更加平衡的深度调查：
+    - 以不同的分析视角和层次，补充先前综述中的方法；
+    - 详细分析现存方法的trade-off ，优势和限制；
+    - 更广范围内的特征、方法和可解释；
+- 对最近综述更全面的介绍：
+
+作者构建了一个建模方法的框架：
+
+![image-20210908183755365](/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908183755365.png)
+
+**预测任务**
+
+- 首先，**预测**可以根据问题设想和应用任务，被认为是分类问题或者是预测问题。
+    - 用户的节点行为预测是分类任务；
+    - 对未来特定时间某个item或者cascade集群的具体valume的预测是回归任务；
+- 其次，**可以在信息发布之前或之后进行预测。根据预测时间的不同，现有的方法可以分为事前预测和事后预测。**
+- 最后，信息预测可以根据任务的粒度the granularity of the tasks分为宏观、微观和中观层面。
+
+**建模方法**
+
+三类：基于特征的方法、generative models以及深度学习方法；
+
+
+
+#### **2 PROBLEM DEFINITION, EVALUATION, DATASETS, AND TAXONOMY**
+
+##### 2.1 Types of Information Items/Cascades
+
+​		这篇文章中，作者将information items 根据其popularity视为可衡量的实体，而信息级联由 **信息项的传播序列**构成。
+
+信息项可以是UGC，其具体内容可以是post、threads，photos和videos。**这些内容彻底改变了用户与信息和其他用户的交互方式，以及信息的创建、呈现、传播dissminated和消亡方式**。**<u>了解决定信息项传播的内部驱动对于许多实际应用程序（如广告、决策和缓存策略）来说是非常重要的</u>**。
+
+​		信息项可以被分类为endogenous or exogenous 内源性和外源性两种。前者的信息项来源于社交影响力，而后者来源于突发事件。
+
+##### 2.2 Problem Definitions
+
+​		信息项或者信息级联 本身是transient, sparse, and biased data.瞬态的，稀疏的和有偏差的数据，也就不能预测，但是为了刻画信息项和信息级联同时探索在何种条件下，预测问题可以被解决。**作者提出了三个类别：分类和回归、事前和事后预测以及预测粒度。**
+
+###### 2.2.1 Classification versus Regression.
+
+预测问题是鉴于其初始状态，预测信息的最终受众，注意力和影响。
+
+- 二分类问题，相关阈值；
+- 多分类问题，需要预定义几个popularity interval间隔，预测信息项将落到哪个区间；
+- 预测问题，预测具体的值；
+
+一般而言，分类问题相对比预测问题简单。**尽管公式化回归背后的直觉更加自然**，并提供了一个细粒度的范围来分析哪些因素会影响未来的流行度并导致信息项成功，但**精确的回归预测通常需要更多关于项目和用户的信息**，提取出更加复杂的关系，因此**意味着更高的复杂性**。同时，它经常会遇到overfitting, inductive bias, and prediction error accumulations。过拟合、感应偏差和预测误差累积；**同时，作者也发现许多模型可以在回归模型和分类模型之间轻松的转换。**
+
+###### 2.2.2 Ex-ante Prediction versus Peeking Strategy
+
+一般而言，事前预测更加具有挑战性，因为我们**获得的信息是有限的、数据量巨大的，又是敏感的资源，很难获得**；而其价值是吸引人的：事前预测常常利于下游任务，比如广告和市场。
+
+因为事前预测的数据不易获取，因而通常求其次，即peek into the early stage of a cascade’s evolving process窥探演化过程的早期阶段。事后分析的价值虽然没有事前价值大，但是其价值存在且不小。因为通过分析，得到三条结论：
+
+- 对于微博推文来说，它们获得用户关注的速度越快，由于新出现的竞争对手，它们消失的速度就越快；
+- 对于推特标签，其在用户中的流行持续时间要比微博上的持续时间长；
+- 至于APS论文，项目的发展速度是在中间。
+
+**事后分析，表明一个项目成功传播的可能性。其基本原理是，在早期阶段成功传播的信息项往往会变得流行，即早期模式表明长期流行[183]。**但是，**Previous works found that the similar, or even the same, content information may vary significantly in terms of popularity [39].以前的研究发现，相似或相同内容的信息其受欢迎程度差异也会很大**，由此人们产生了疑问：
+
+- 是数据不足还是本来就不可预测；
+- 是否是现有数据的内在影响力比较小，或是外部的一些数据因素决定了事情的最终流行程度；
+
+这个问题没有答案，但也促使研究人员研究各种peek 策略。
+
+###### 2.2.3 Macro-, Micro-, and Meso-level.
+
+简单来说，分别对应三个程度：全局整体、group community 和个体。
+
+##### 2.3 Evaluation Metrics and Datasets
+
+**分类指标：**Accuracy, Precision, Recall, and F -measure.且常伴随一个阈值；
+
+- 准确率：类别不均衡问题，由于受欢迎程度分布的高度倾斜。
+
+    缓解途径：
+
+    - 类别均衡二分类；
+    - 从大量数据集中过滤出（下采样）得到一个均衡的数据集；
+    - 早期的一些peek 策略的研究员，会选择忽视小样本，以产生均衡数据集。
+
+**回归指标**：mean square error (MSE) and ts variants.
+
+- Popularity也常使用logarithmic scale对数形式，MSLE or RMSLE，以防止损失函数和指标被极端值影响，同时确保数值稳定性。
+- 确定/相关系数及其变体、排名[186]、k-top覆盖率[152，248]也是某些特定场景中常用的指标。
+
+**Previous works found that a model might perform well in one metric but significantly drop in another [74], making it difficult to do a fair comparison between various approaches. 先前的研究表明，一个模型可能在一个指标上表现好，但是可能在另一个上表现不好。因此很难作出一个公正的裁决在不同的模型方法之间。**
+
+**数据集：**如果希望一个模型能够从一个数据集泛化到另外一个有差异的数据集，是很难的，同时有时甚至是不可能的。
+
+#### 3 信息级联的特征和特征工程方法
+
+信息级联的可以被分成五类：时序、级联结构、全局图、user用户或者item信息项的属性和内容特征content features。
+
+##### 3.1 时序特征
+
+###### 3.1.1 Observation Time.
+
+###### 3.1.2 Publication Time.
+
+24个小时的时间点。晚间发布的内容相对比白天发的更不容易被人view。
+
+###### 3.1.3 First Participation Time.
+
+首个参与者是首发者后第一个转发或者参与的人。
+
+###### 3.1.4 Evolving Trends.
+
+这一点已经被证明，它具有informatively signals。
+
+**时间序列的时序模型被分成几个类别：平滑增长，突然的增长和下降等十种演化趋势。**
+
+十种演化趋势可以通过**分层聚类算法**进行聚类
+
+![image-20210908211300311](/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908211300311.png)
+
+###### 3.1.5 Discussion.
+
+尽管时序特征很重要，最近的研究表明他们在一些场景下效果并不好；
+
+时序特征的优势随着时间消失，它的影响没有其他的特征的效果好；
+
+##### 3.2 Structural Features
+
+级联结构有时指代为信息传播。
+
+对级联结构进行建模的研究被分成三个部分：
+
+- 参与者，仅仅级联图；
+- 全局图，参与者和非参与者；
+- R阶可达图，一种折衷方案，将级联图扩展到全局图的范围内。
+
+###### 3.2.1 Cascade Graph.
+
+###### 3.2.2 Global Graph.
+
+和我们常见的图很相似。
+
+图的类别：
+
+- 有向图，边带方向；
+- 有权图，节点或者边有相应的权重；
+- 超图，节点或者边具有超过一种类型的属性，一张图以作者，论文作为节点，发布时间、引用者等作为边；
+- 属性图，节点或者边具有特征，推特的文本，论文的摘要；
+
+###### 3.2.3 r -reachable Graph.
+
+是从Global Graph.中获取到的子图。
+
+
+
+##### 3.3 User/Item Features
+
+时间和结构特征需要对早期观测进行探索，因此显得不切合实际，因而会选择从用户和信息项入手。它们具有独特的属性和innate attractiveness天生的吸引力，因此，在事前预测中比较实用。
+
+###### 3.3.1 User Features.
+
+用户行为在信息传播和消费中起着至关重要的作用选择（例如，查看、评论、共享和首选）。最常见的用户功能之一是作为用户影响力代理的追随者数量，这意味着未来的受欢迎程度[240]。**拥有大量追随者（观众）的人，如名人而新闻机构比普通用户更可能产生大量的级联，因为它们的信息在网络中更加可见**。然而，大型级联不仅仅是由有影响力的用户产生，**研究由普通用户产生的大型级联很有意义而不是名人**[51]。许多其他用户特性已经被广泛研究和探索了多年分析和预测信息项/级联的流行程度，例**如简介（姓名、年龄/地区、教育、就业、账户创建日期等）[238]，历史行为（频率发布项目和与其他用户交互的数量、活动时间等[11,83,182]，用户兴趣[229]，集体[132]，相似[177]，过去的成功[11]，活动/被动[227234]，发现[142]，亲和力和响应能力[238]，**等等。
+
+###### 3.3.2 Item Features.
+
+- users’ interfaces affect the visibility of items 互动会影响item的可见性；
+- 文章的metadata影响评论的数量等指标。
+
+###### 3.3.3 Discussion.
+
+
+
+
+
