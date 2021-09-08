@@ -235,14 +235,87 @@ dropedge方法是一种GCN模型中缓解过拟合的方法2019，它可以增�
 
 #### Bi-GCN Rumor Detection Model
 
-​		作者提及
+​		作者提及一个两层的一阶cheb网络是该模型的基础。
 
+<img src="/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908131746335.png" alt="image-20210908131746335" style="zoom:67%;" />
 
+##### 1 Construct Propagation and Dispersion Graph
+
+​		Bi-GCN中对于propagation和dispersion特征的获取是独立的，同时两个特征的获取至少从形式上看，差别在于post顺序：从上到下，从下到上。而这一点是通过单向链接的邻接矩阵实现的。**而邻接矩阵的性质是，矩阵的转置实现节点传播的方向**。因此两者代码组织的差别就在于邻接矩阵。而X是共用的。
+
+**todo：但是有个巨大的问题是：为什么方向的转置，可以获取这两个特征，为什么从高到低可以获取propagation而不是dispersion特征。**
+
+##### 2 Calculate the High-level Node Representations
+
+​		一阶chebNet>ReLU激活函数>Dropout
+
+##### 3 Root Feature Enhancement
+
+​		在谣言传播中，root post 正是因为具有丰富的信息才引起广泛的影响。**因此有必要通过某种策略来充分利用root post的信息**：当前层的输入是上一层输入的root node 的特征向量和上一层输出的隐藏层vectors的concate
+
+##### 4 Representations of Propagation and Dispersion for Rumor Classification
+
+TD和BU-GCN获取到的特征首先各自做平均池化操作 > 池化操作后得到的特征进行concate操作 > FCs > Softmax；
+
+训练的时候使用交叉熵损失函数，同时应用L2正则惩罚项；
+
+#### Experiments
+
+##### 1 Settings and Datasets
+
+使用了微博2016年、推特15和推特16三个数据集。三个数据集的节点指代user，边指代响应关系，特征features are the extracted top-5000 words in
+terms of the TF-IDF values。
+
+<img src="/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908135112523.png" alt="image-20210908135112523" style="zoom:67%;" />
+
+##### 2 Experimental Setup
+
+- DTC 2011： 决策树+手工特征；
+- SVM-RBF 2012：SVM+RBF核+手工特征；
+- SVM-TS 2015：SVM+手工特征+时间序列；
+- SVM-TK 2017：SVM+传播树kernel；
+- RvNN 2018 ：树结构+GRU单元；
+- PPC RNN+CNN 2018：RNN+CNN+传播链中users的特征；
+
+特别地：
+
+- **作者对于以上几种方法的执行 是在不同的框架中执行的。**
+- 为了公平比较，数据集分成五部分，进行五折交叉验证；
+- BI-GCN的模型参数的update使用SGD，optimize使用Adam；
+- 特征维度是64，egdedrop 0.2，dropout 0.5，训练epoch 200；early stopping 10；
+- Note that we do not employ SVM-TK on the Weibo dataset due to its exponential complexity on large datasets.（**头一次见，大家对这个进行解释。**）
+
+##### 3  Overall Performance
+
+- 首先，深度学习方法要好于传统方法；
+- 其次，Bi-GCN优于PPC RNN+CNN，主要是后者的RNN和CNN不擅长处理图结构，因此无法获取重要的传播结构特征表示；
+- 最后，# 由于RvNN，因为后者仅仅使用叶子节点，以至于被后面的post所严重影响。与RvNN的对比，进一步强调了本方法中的root enhancement的价值。
+
+##### 4 Ablation Study
+
+- 首先，root增强好；
+
+    <img src="/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908141315816.png" alt="image-20210908141315816" style="zoom:67%;" />
+
+- 其次，验证了双向考虑模型会比单独考虑某个方向或者不考虑方向的效果要好；
+
+- **最后，无论是考虑不同的数据集还是是否考虑root enhancement，基于GCN的无向、单向和双向的模型的效果都比其他的baseline效果好，因此表明GCN的优越性。**（这一点要结合上面的图表和下面的图表的数据，才能得到这样的结论。）
+
+<img src="/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908141955248.png" alt="image-20210908141955248" style="zoom:80%;" />
+
+##### 5 Early Rumor Detection
+
+​		在谣言传播的早期如果可以达到跟传播很久时检测得到的效果基本一致，就表明该模型的检测性能比较卓越。
+
+<img src="/home/cold/PaperReadFastly/PaperRead/论文阅读列表/2021年度/C谣言检测/《Rumor Detection on Social Media with Event Augmentations》.assets/image-20210908142341249.png" alt="image-20210908142341249" style="zoom:80%;" />
+
+​		从图4看出，首先主推模型 能够在早期达到相对较高的准确度；其次，早期的表现效果优于其他模型；
+
+​		因此，**Bi-GCN，不仅仅在长期检测中有价值，在早期检测中也有价值。**
 
 
 
 
 
 ### 《A Survey of Information Cascade Analysis: Models, Predictions, and Recent Advances》
-
 
