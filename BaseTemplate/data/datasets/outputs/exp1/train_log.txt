@@ -1,0 +1,9 @@
+2021-09-20 15:12:26 | INFO     | __main__:30 - Mnist
+2021-09-20 15:12:26 | INFO     | __main__:14 - [=Dataset=>] ,使用内置方法得到原始数据
+2021-09-20 15:12:26 | INFO     | __main__:17 - hahahh
+2021-09-21 22:18:58 | INFO     | __main__:56 - Mnist
+2021-09-21 22:18:58 | INFO     | __main__:17 - [=Dataset=>] ,使用内置方法得到原始数据
+2021-09-21 22:18:58 | INFO     | __main__:18 - [=Dataset=>] ,get eval dataset
+2021-09-21 22:19:14 | INFO     | __main__:56 - Mnist
+2021-09-21 22:19:14 | INFO     | __main__:17 - [=Dataset=>] ,使用内置方法得到原始数据
+2021-09-21 22:19:14 | INFO     | __main__:18 - [=Dataset=>] ,get eval dataset

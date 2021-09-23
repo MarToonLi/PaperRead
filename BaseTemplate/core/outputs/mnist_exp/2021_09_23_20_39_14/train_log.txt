@@ -1,0 +1,126 @@
+2021-09-23 20:39:14 | INFO     | core.train:114 - parser中接受到的参数列表: Namespace(batch_size=64, cache=False, ckpt='/home/cold/PaperReadFastly/模板代码/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth', devices=None, dist_backend='nccl', dist_url=None, exp_file=None, experiment_name='mnist_exp', fp16=True, machine_rank=0, name=None, num_machines=1, opts=[], resume=False, start_epoch=None)
+2021-09-23 20:39:14 | INFO     | core.train:115 - 模型训练中 执行参数列表:
+╒══════════════════╤════════════════════════════╕
+│ keys             │ values                     │
+╞══════════════════╪════════════════════════════╡
+│ seed             │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ output_dir       │ './outputs'                │
+├──────────────────┼────────────────────────────┤
+│ print_interval   │ 10                         │
+├──────────────────┼────────────────────────────┤
+│ eval_interval    │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ num_classes      │ 80                         │
+├──────────────────┼────────────────────────────┤
+│ depth            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ width            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ data_num_workers │ 4                          │
+├──────────────────┼────────────────────────────┤
+│ input_size       │ (640, 640)                 │
+├──────────────────┼────────────────────────────┤
+│ multiscale_range │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ data_dir         │ None                       │
+├──────────────────┼────────────────────────────┤
+│ train_ann        │ 'instances_train2017.json' │
+├──────────────────┼────────────────────────────┤
+│ val_ann          │ 'instances_val2017.json'   │
+├──────────────────┼────────────────────────────┤
+│ mosaic_prob      │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ mixup_prob       │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ hsv_prob         │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ flip_prob        │ 0.5                        │
+├──────────────────┼────────────────────────────┤
+│ degrees          │ 10.0                       │
+├──────────────────┼────────────────────────────┤
+│ translate        │ 0.1                        │
+├──────────────────┼────────────────────────────┤
+│ mosaic_scale     │ (0.1, 2)                   │
+├──────────────────┼────────────────────────────┤
+│ mixup_scale      │ (0.5, 1.5)                 │
+├──────────────────┼────────────────────────────┤
+│ shear            │ 2.0                        │
+├──────────────────┼────────────────────────────┤
+│ perspective      │ 0.0                        │
+├──────────────────┼────────────────────────────┤
+│ enable_mixup     │ True                       │
+├──────────────────┼────────────────────────────┤
+│ warmup_epochs    │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ max_epoch        │ 100                        │
+├──────────────────┼────────────────────────────┤
+│ warmup_lr        │ 0                          │
+├──────────────────┼────────────────────────────┤
+│ basic_lr_per_img │ 0.00015625                 │
+├──────────────────┼────────────────────────────┤
+│ scheduler        │ 'warmcos'                  │
+├──────────────────┼────────────────────────────┤
+│ ema              │ True                       │
+├──────────────────┼────────────────────────────┤
+│ weight_decay     │ 0.0005                     │
+├──────────────────┼────────────────────────────┤
+│ momentum         │ 0.9                        │
+├──────────────────┼────────────────────────────┤
+│ exp_name         │ 'mnist_exp'                │
+├──────────────────┼────────────────────────────┤
+│ test_size        │ (28, 28)                   │
+├──────────────────┼────────────────────────────┤
+│ test_conf        │ 0.01                       │
+├──────────────────┼────────────────────────────┤
+│ nmsthre          │ 0.65                       │
+╘══════════════════╧════════════════════════════╛
+2021-09-23 20:39:14 | INFO     | core.train:119 - Model Summary: Params: 0.02M, Gflops: 0.00
+2021-09-23 20:39:15 | INFO     | core.train:273 - loading checkpoint for fine tuning
+2021-09-23 20:39:15 | ERROR    | __main__:147 - An error has been caught in function '<module>', process 'MainProcess' (126310), thread 'MainThread' (139624691220864):
+Traceback (most recent call last):
+
+> File "launch.py", line 147, in <module>
+    trainer.train()
+    │       └ <function Trainer.train at 0x7efc79816b90>
+    └ <core.train.Trainer object at 0x7efc7981ba50>
+
+  File "/home/cold/PaperReadFastly/BaseTemplate/core/train.py", line 53, in train
+    self.before_train()
+    │    └ <function Trainer.before_train at 0x7efc79818170>
+    └ <core.train.Trainer object at 0x7efc7981ba50>
+
+  File "/home/cold/PaperReadFastly/BaseTemplate/core/train.py", line 126, in before_train
+    model = self.resume_train(model)
+            │    │            └ Mnist_CNN(
+            │    │                (NeuralNetwork): NeuralNetwork(
+            │    │                  (conv1): Conv2d(1, 10, kernel_size=(5, 5), stride=(1, 1))
+            │    │                  (conv2): Conv2...
+            │    └ <function Trainer.resume_train at 0x7efc79818560>
+            └ <core.train.Trainer object at 0x7efc7981ba50>
+
+  File "/home/cold/PaperReadFastly/BaseTemplate/core/train.py", line 275, in resume_train
+    ckpt = torch.load(ckpt_file, map_location=self.device)["model"]
+           │     │    │                       │    └ 'cuda:0'
+           │     │    │                       └ <core.train.Trainer object at 0x7efc7981ba50>
+           │     │    └ '/home/cold/PaperReadFastly/模板代码/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth'
+           │     └ <function load at 0x7efc7abe9cb0>
+           └ <module 'torch' from '/home/cold/anaconda3/envs/paper/lib/python3.7/site-packages/torch/__init__.py'>
+
+  File "/home/cold/anaconda3/envs/paper/lib/python3.7/site-packages/torch/serialization.py", line 581, in load
+    with _open_file_like(f, 'rb') as opened_file:
+         │               └ '/home/cold/PaperReadFastly/模板代码/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth'
+         └ <function _open_file_like at 0x7efc7abe90e0>
+  File "/home/cold/anaconda3/envs/paper/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           │          │               └ 'rb'
+           │          └ '/home/cold/PaperReadFastly/模板代码/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth'
+           └ <class 'torch.serialization._open_file'>
+  File "/home/cold/anaconda3/envs/paper/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+          │           │                   │     └ 'rb'
+          │           │                   └ '/home/cold/PaperReadFastly/模板代码/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth'
+          │           └ <torch.serialization._open_file object at 0x7efce6f13850>
+          └ <class 'torch.serialization._open_file'>
+
+FileNotFoundError: [Errno 2] No such file or directory: '/home/cold/PaperReadFastly/模板代码/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth'

@@ -1,0 +1,227 @@
+2021-09-23 17:04:11 | INFO     | core.train:114 - parser中接受到的参数列表: Namespace(batch_size=64, cache=False, ckpt=None, devices=None, dist_backend='nccl', dist_url=None, exp_file=None, experiment_name='mnist_exp', fp16=True, machine_rank=0, name=None, num_machines=1, opts=[], resume=False, start_epoch=None)
+2021-09-23 17:04:11 | INFO     | core.train:115 - 模型训练中 执行参数列表:
+╒══════════════════╤════════════════════════════╕
+│ keys             │ values                     │
+╞══════════════════╪════════════════════════════╡
+│ seed             │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ output_dir       │ './outputs'                │
+├──────────────────┼────────────────────────────┤
+│ print_interval   │ 10                         │
+├──────────────────┼────────────────────────────┤
+│ eval_interval    │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ num_classes      │ 80                         │
+├──────────────────┼────────────────────────────┤
+│ depth            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ width            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ data_num_workers │ 4                          │
+├──────────────────┼────────────────────────────┤
+│ input_size       │ (640, 640)                 │
+├──────────────────┼────────────────────────────┤
+│ multiscale_range │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ data_dir         │ None                       │
+├──────────────────┼────────────────────────────┤
+│ train_ann        │ 'instances_train2017.json' │
+├──────────────────┼────────────────────────────┤
+│ val_ann          │ 'instances_val2017.json'   │
+├──────────────────┼────────────────────────────┤
+│ mosaic_prob      │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ mixup_prob       │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ hsv_prob         │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ flip_prob        │ 0.5                        │
+├──────────────────┼────────────────────────────┤
+│ degrees          │ 10.0                       │
+├──────────────────┼────────────────────────────┤
+│ translate        │ 0.1                        │
+├──────────────────┼────────────────────────────┤
+│ mosaic_scale     │ (0.1, 2)                   │
+├──────────────────┼────────────────────────────┤
+│ mixup_scale      │ (0.5, 1.5)                 │
+├──────────────────┼────────────────────────────┤
+│ shear            │ 2.0                        │
+├──────────────────┼────────────────────────────┤
+│ perspective      │ 0.0                        │
+├──────────────────┼────────────────────────────┤
+│ enable_mixup     │ True                       │
+├──────────────────┼────────────────────────────┤
+│ warmup_epochs    │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ max_epoch        │ 100                        │
+├──────────────────┼────────────────────────────┤
+│ warmup_lr        │ 0                          │
+├──────────────────┼────────────────────────────┤
+│ basic_lr_per_img │ 0.00015625                 │
+├──────────────────┼────────────────────────────┤
+│ scheduler        │ 'warmcos'                  │
+├──────────────────┼────────────────────────────┤
+│ ema              │ True                       │
+├──────────────────┼────────────────────────────┤
+│ weight_decay     │ 0.0005                     │
+├──────────────────┼────────────────────────────┤
+│ momentum         │ 0.9                        │
+├──────────────────┼────────────────────────────┤
+│ exp_name         │ 'mnist_exp'                │
+├──────────────────┼────────────────────────────┤
+│ test_size        │ (28, 28)                   │
+├──────────────────┼────────────────────────────┤
+│ test_conf        │ 0.01                       │
+├──────────────────┼────────────────────────────┤
+│ nmsthre          │ 0.65                       │
+╘══════════════════╧════════════════════════════╛
+2021-09-23 17:04:11 | INFO     | core.train:119 - Model Summary: Params: 0.02M, Gflops: 0.00
+2021-09-23 17:04:13 | INFO     | exp.mnist_exp:98 - 加载训练数据的配置信息.
+2021-09-23 17:04:13 | INFO     | data.datasets.mnist:55 - [=Dataset=>]  get trian dataset | data.shape:torch.Size([60000, 1, 28, 28]) | target.shape:torch.Size([60000]).
+2021-09-23 17:04:13 | INFO     | data.datasets.mnist:64 -               data: mean:35.11 | std:79.7 | max:255.0 | min:0.0
+2021-09-23 17:04:13 | INFO     | data.datasets.mnist:73 -               transform: mean:-0.8502 | std:0.4379 | max:1.0 | min:-1.0
+2021-09-23 17:04:13 | INFO     | data.data_sampler:86 - [=BatchSampler=>] batch_size:64 | drop_last:True | len:937.
+2021-09-23 17:04:13 | INFO     | core.train:133 - init prefetcher, this might take one minute or less...
+2021-09-23 17:04:13 | INFO     | data.data_utils:25 - [=DataLoader=>] worker_id:0 | seed:3244736326.
+2021-09-23 17:04:13 | INFO     | data.data_utils:25 - [=DataLoader=>] worker_id:1 | seed:1415092339.
+2021-09-23 17:04:14 | INFO     | core.train:163 - Training start...
+2021-09-23 17:04:14 | INFO     | core.train:164 - 
+Mnist_CNN(
+  (NeuralNetwork): NeuralNetwork(
+    (conv1): Conv2d(1, 10, kernel_size=(5, 5), stride=(1, 1))
+    (conv2): Conv2d(10, 20, kernel_size=(5, 5), stride=(1, 1))
+    (conv2_drop): Dropout2d(p=0.5, inplace=False)
+    (fc1): Linear(in_features=320, out_features=50, bias=True)
+    (fc2): Linear(in_features=50, out_features=10, bias=True)
+  )
+  (loss): CrossEntropyLoss()
+)
+2021-09-23 17:04:14 | INFO     | core.train:172 - ---> start train epoch1
+2021-09-23 17:04:14 | INFO     | core.train:230 - epoch: 1/100, iter: 10/937, mem: 4Mb, iter_time: 0.065s, data_time: 0.001s, loss: 2.3, lr: 2.134e-05, size: 640, ETA: 1:41:59
+2021-09-23 17:04:15 | INFO     | core.train:230 - epoch: 1/100, iter: 20/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 4.269e-05, size: 640, ETA: 1:37:47
+2021-09-23 17:04:16 | INFO     | core.train:230 - epoch: 1/100, iter: 30/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 6.403e-05, size: 640, ETA: 1:36:26
+2021-09-23 17:04:16 | INFO     | core.train:230 - epoch: 1/100, iter: 40/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.002s, loss: 2.3, lr: 8.538e-05, size: 640, ETA: 1:35:46
+2021-09-23 17:04:17 | INFO     | core.train:230 - epoch: 1/100, iter: 50/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.067e-04, size: 640, ETA: 1:35:16
+2021-09-23 17:04:17 | INFO     | core.train:230 - epoch: 1/100, iter: 60/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.281e-04, size: 640, ETA: 1:34:58
+2021-09-23 17:04:18 | INFO     | core.train:230 - epoch: 1/100, iter: 70/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.494e-04, size: 640, ETA: 1:34:44
+2021-09-23 17:04:19 | INFO     | core.train:230 - epoch: 1/100, iter: 80/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.002s, loss: 2.3, lr: 1.708e-04, size: 640, ETA: 1:34:37
+2021-09-23 17:04:19 | INFO     | core.train:230 - epoch: 1/100, iter: 90/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.921e-04, size: 640, ETA: 1:34:30
+2021-09-23 17:04:20 | INFO     | core.train:230 - epoch: 1/100, iter: 100/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 2.134e-04, size: 640, ETA: 1:34:20
+2021-09-23 17:04:20 | INFO     | core.train:230 - epoch: 1/100, iter: 110/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 2.348e-04, size: 640, ETA: 1:34:14
+2021-09-23 17:04:21 | INFO     | core.train:230 - epoch: 1/100, iter: 120/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 2.561e-04, size: 640, ETA: 1:34:11
+2021-09-23 17:04:22 | INFO     | core.train:230 - epoch: 1/100, iter: 130/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 2.775e-04, size: 640, ETA: 1:34:07
+2021-09-23 17:04:22 | INFO     | core.train:230 - epoch: 1/100, iter: 140/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 2.988e-04, size: 640, ETA: 1:34:02
+2021-09-23 17:04:23 | INFO     | core.train:230 - epoch: 1/100, iter: 150/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 3.202e-04, size: 640, ETA: 1:33:58
+2021-09-23 17:04:23 | INFO     | core.train:230 - epoch: 1/100, iter: 160/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 3.415e-04, size: 640, ETA: 1:33:55
+2021-09-23 17:04:24 | INFO     | core.train:230 - epoch: 1/100, iter: 170/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 3.629e-04, size: 640, ETA: 1:33:52
+2021-09-23 17:04:25 | INFO     | core.train:230 - epoch: 1/100, iter: 180/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 3.842e-04, size: 640, ETA: 1:33:50
+2021-09-23 17:04:25 | INFO     | core.train:230 - epoch: 1/100, iter: 190/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 4.055e-04, size: 640, ETA: 1:33:49
+2021-09-23 17:04:26 | INFO     | core.train:230 - epoch: 1/100, iter: 200/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 4.269e-04, size: 640, ETA: 1:33:47
+2021-09-23 17:04:26 | INFO     | core.train:230 - epoch: 1/100, iter: 210/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 4.482e-04, size: 640, ETA: 1:33:44
+2021-09-23 17:04:27 | INFO     | core.train:230 - epoch: 1/100, iter: 220/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 4.696e-04, size: 640, ETA: 1:33:41
+2021-09-23 17:04:28 | INFO     | core.train:230 - epoch: 1/100, iter: 230/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 4.909e-04, size: 640, ETA: 1:33:40
+2021-09-23 17:04:28 | INFO     | core.train:230 - epoch: 1/100, iter: 240/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.002s, loss: 2.3, lr: 5.123e-04, size: 640, ETA: 1:33:40
+2021-09-23 17:04:29 | INFO     | core.train:230 - epoch: 1/100, iter: 250/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 5.336e-04, size: 640, ETA: 1:33:38
+2021-09-23 17:04:29 | INFO     | core.train:230 - epoch: 1/100, iter: 260/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 5.550e-04, size: 640, ETA: 1:33:37
+2021-09-23 17:04:30 | INFO     | core.train:230 - epoch: 1/100, iter: 270/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 5.763e-04, size: 640, ETA: 1:33:36
+2021-09-23 17:04:31 | INFO     | core.train:230 - epoch: 1/100, iter: 280/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 5.977e-04, size: 640, ETA: 1:33:34
+2021-09-23 17:04:31 | INFO     | core.train:230 - epoch: 1/100, iter: 290/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 6.190e-04, size: 640, ETA: 1:33:32
+2021-09-23 17:04:32 | INFO     | core.train:230 - epoch: 1/100, iter: 300/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 6.403e-04, size: 640, ETA: 1:33:30
+2021-09-23 17:04:32 | INFO     | core.train:230 - epoch: 1/100, iter: 310/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 2.3, lr: 6.617e-04, size: 640, ETA: 1:33:28
+2021-09-23 17:04:33 | INFO     | core.train:230 - epoch: 1/100, iter: 320/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 6.830e-04, size: 640, ETA: 1:33:27
+2021-09-23 17:04:34 | INFO     | core.train:230 - epoch: 1/100, iter: 330/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 7.044e-04, size: 640, ETA: 1:33:30
+2021-09-23 17:04:34 | INFO     | core.train:230 - epoch: 1/100, iter: 340/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 7.257e-04, size: 640, ETA: 1:33:31
+2021-09-23 17:04:35 | INFO     | core.train:230 - epoch: 1/100, iter: 350/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.002s, loss: 2.3, lr: 7.471e-04, size: 640, ETA: 1:33:30
+2021-09-23 17:04:35 | INFO     | core.train:230 - epoch: 1/100, iter: 360/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 7.684e-04, size: 640, ETA: 1:33:29
+2021-09-23 17:04:36 | INFO     | core.train:230 - epoch: 1/100, iter: 370/937, mem: 4Mb, iter_time: 0.064s, data_time: 0.001s, loss: 2.3, lr: 7.898e-04, size: 640, ETA: 1:33:40
+2021-09-23 17:04:37 | INFO     | core.train:230 - epoch: 1/100, iter: 380/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 8.111e-04, size: 640, ETA: 1:33:39
+2021-09-23 17:04:37 | INFO     | core.train:230 - epoch: 1/100, iter: 390/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 8.324e-04, size: 640, ETA: 1:33:38
+2021-09-23 17:04:38 | INFO     | core.train:230 - epoch: 1/100, iter: 400/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 8.538e-04, size: 640, ETA: 1:33:38
+2021-09-23 17:04:39 | INFO     | core.train:230 - epoch: 1/100, iter: 410/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 8.751e-04, size: 640, ETA: 1:33:37
+2021-09-23 17:04:39 | INFO     | core.train:230 - epoch: 1/100, iter: 420/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.001s, loss: 2.3, lr: 8.965e-04, size: 640, ETA: 1:33:38
+2021-09-23 17:04:40 | INFO     | core.train:230 - epoch: 1/100, iter: 430/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 9.178e-04, size: 640, ETA: 1:33:38
+2021-09-23 17:04:40 | INFO     | core.train:230 - epoch: 1/100, iter: 440/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 9.392e-04, size: 640, ETA: 1:33:37
+2021-09-23 17:04:41 | INFO     | core.train:230 - epoch: 1/100, iter: 450/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 9.605e-04, size: 640, ETA: 1:33:37
+2021-09-23 17:04:42 | INFO     | core.train:230 - epoch: 1/100, iter: 460/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 9.819e-04, size: 640, ETA: 1:33:36
+2021-09-23 17:04:42 | INFO     | core.train:230 - epoch: 1/100, iter: 470/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.003e-03, size: 640, ETA: 1:33:35
+2021-09-23 17:04:43 | INFO     | core.train:230 - epoch: 1/100, iter: 480/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.025e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:43 | INFO     | core.train:230 - epoch: 1/100, iter: 490/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 1.046e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:44 | INFO     | core.train:230 - epoch: 1/100, iter: 500/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 1.067e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:45 | INFO     | core.train:230 - epoch: 1/100, iter: 510/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.001s, loss: 2.3, lr: 1.089e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:45 | INFO     | core.train:230 - epoch: 1/100, iter: 520/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 1.110e-03, size: 640, ETA: 1:33:35
+2021-09-23 17:04:46 | INFO     | core.train:230 - epoch: 1/100, iter: 530/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.131e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:46 | INFO     | core.train:230 - epoch: 1/100, iter: 540/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.153e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:47 | INFO     | core.train:230 - epoch: 1/100, iter: 550/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.001s, loss: 2.3, lr: 1.174e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:48 | INFO     | core.train:230 - epoch: 1/100, iter: 560/937, mem: 4Mb, iter_time: 0.062s, data_time: 0.002s, loss: 2.3, lr: 1.195e-03, size: 640, ETA: 1:33:36
+2021-09-23 17:04:48 | INFO     | core.train:230 - epoch: 1/100, iter: 570/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 1.217e-03, size: 640, ETA: 1:33:37
+2021-09-23 17:04:49 | INFO     | core.train:230 - epoch: 1/100, iter: 580/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 1.238e-03, size: 640, ETA: 1:33:37
+2021-09-23 17:04:49 | INFO     | core.train:230 - epoch: 1/100, iter: 590/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.259e-03, size: 640, ETA: 1:33:36
+2021-09-23 17:04:50 | INFO     | core.train:230 - epoch: 1/100, iter: 600/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.281e-03, size: 640, ETA: 1:33:35
+2021-09-23 17:04:51 | INFO     | core.train:230 - epoch: 1/100, iter: 610/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.302e-03, size: 640, ETA: 1:33:34
+2021-09-23 17:04:51 | INFO     | core.train:230 - epoch: 1/100, iter: 620/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.323e-03, size: 640, ETA: 1:33:33
+2021-09-23 17:04:52 | INFO     | core.train:230 - epoch: 1/100, iter: 630/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.345e-03, size: 640, ETA: 1:33:33
+2021-09-23 17:04:53 | INFO     | core.train:230 - epoch: 1/100, iter: 640/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.366e-03, size: 640, ETA: 1:33:32
+2021-09-23 17:04:53 | INFO     | core.train:230 - epoch: 1/100, iter: 650/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.387e-03, size: 640, ETA: 1:33:31
+2021-09-23 17:04:54 | INFO     | core.train:230 - epoch: 1/100, iter: 660/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.409e-03, size: 640, ETA: 1:33:31
+2021-09-23 17:04:54 | INFO     | core.train:230 - epoch: 1/100, iter: 670/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.430e-03, size: 640, ETA: 1:33:30
+2021-09-23 17:04:55 | INFO     | core.train:230 - epoch: 1/100, iter: 680/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.451e-03, size: 640, ETA: 1:33:29
+2021-09-23 17:04:56 | INFO     | core.train:230 - epoch: 1/100, iter: 690/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.473e-03, size: 640, ETA: 1:33:28
+2021-09-23 17:04:56 | INFO     | core.train:230 - epoch: 1/100, iter: 700/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.494e-03, size: 640, ETA: 1:33:27
+2021-09-23 17:04:57 | INFO     | core.train:230 - epoch: 1/100, iter: 710/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.515e-03, size: 640, ETA: 1:33:26
+2021-09-23 17:04:57 | INFO     | core.train:230 - epoch: 1/100, iter: 720/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.537e-03, size: 640, ETA: 1:33:25
+2021-09-23 17:04:58 | INFO     | core.train:230 - epoch: 1/100, iter: 730/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.558e-03, size: 640, ETA: 1:33:24
+2021-09-23 17:04:59 | INFO     | core.train:230 - epoch: 1/100, iter: 740/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.580e-03, size: 640, ETA: 1:33:23
+2021-09-23 17:04:59 | INFO     | core.train:230 - epoch: 1/100, iter: 750/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.601e-03, size: 640, ETA: 1:33:23
+2021-09-23 17:05:00 | INFO     | core.train:230 - epoch: 1/100, iter: 760/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.622e-03, size: 640, ETA: 1:33:22
+2021-09-23 17:05:00 | INFO     | core.train:230 - epoch: 1/100, iter: 770/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.644e-03, size: 640, ETA: 1:33:22
+2021-09-23 17:05:01 | INFO     | core.train:230 - epoch: 1/100, iter: 780/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.665e-03, size: 640, ETA: 1:33:21
+2021-09-23 17:05:02 | INFO     | core.train:230 - epoch: 1/100, iter: 790/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.686e-03, size: 640, ETA: 1:33:20
+2021-09-23 17:05:02 | INFO     | core.train:230 - epoch: 1/100, iter: 800/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.3, lr: 1.708e-03, size: 640, ETA: 1:33:20
+2021-09-23 17:05:03 | INFO     | core.train:230 - epoch: 1/100, iter: 810/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.729e-03, size: 640, ETA: 1:33:20
+2021-09-23 17:05:03 | INFO     | core.train:230 - epoch: 1/100, iter: 820/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.001s, loss: 2.3, lr: 1.750e-03, size: 640, ETA: 1:33:19
+2021-09-23 17:05:04 | INFO     | core.train:230 - epoch: 1/100, iter: 830/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.772e-03, size: 640, ETA: 1:33:19
+2021-09-23 17:05:05 | INFO     | core.train:230 - epoch: 1/100, iter: 840/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.793e-03, size: 640, ETA: 1:33:18
+2021-09-23 17:05:05 | INFO     | core.train:230 - epoch: 1/100, iter: 850/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.2, lr: 1.814e-03, size: 640, ETA: 1:33:17
+2021-09-23 17:05:06 | INFO     | core.train:230 - epoch: 1/100, iter: 860/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.836e-03, size: 640, ETA: 1:33:17
+2021-09-23 17:05:06 | INFO     | core.train:230 - epoch: 1/100, iter: 870/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.2, lr: 1.857e-03, size: 640, ETA: 1:33:16
+2021-09-23 17:05:07 | INFO     | core.train:230 - epoch: 1/100, iter: 880/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.878e-03, size: 640, ETA: 1:33:15
+2021-09-23 17:05:08 | INFO     | core.train:230 - epoch: 1/100, iter: 890/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.2, lr: 1.900e-03, size: 640, ETA: 1:33:15
+2021-09-23 17:05:08 | INFO     | core.train:230 - epoch: 1/100, iter: 900/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.3, lr: 1.921e-03, size: 640, ETA: 1:33:14
+2021-09-23 17:05:09 | INFO     | core.train:230 - epoch: 1/100, iter: 910/937, mem: 4Mb, iter_time: 0.061s, data_time: 0.002s, loss: 2.2, lr: 1.942e-03, size: 640, ETA: 1:33:14
+2021-09-23 17:05:09 | INFO     | core.train:230 - epoch: 1/100, iter: 920/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.2, lr: 1.964e-03, size: 640, ETA: 1:33:13
+2021-09-23 17:05:10 | INFO     | core.train:230 - epoch: 1/100, iter: 930/937, mem: 4Mb, iter_time: 0.060s, data_time: 0.001s, loss: 2.2, lr: 1.985e-03, size: 640, ETA: 1:33:13
+2021-09-23 17:05:11 | INFO     | core.train:306 - Save weights to ./outputs/mnist_exp/2021_09_23_17_04_11
+2021-09-23 17:05:11 | INFO     | core.train:168 - Training of experiment is done and the best AP is 0.00
+2021-09-23 17:05:11 | ERROR    | __main__:148 - An error has been caught in function '<module>', process 'MainProcess' (120581), thread 'MainThread' (139817778200960):
+Traceback (most recent call last):
+
+> File "launch.py", line 148, in <module>
+    trainer.train()
+    │       └ <function Trainer.train at 0x7f296e6349e0>
+    └ <core.train.Trainer object at 0x7f296e639dd0>
+
+  File "/home/cold/PaperReadFastly/模板代码/core/train.py", line 55, in train
+    self.train_in_epoch()
+    │    └ <function Trainer.train_in_epoch at 0x7f296e634dd0>
+    └ <core.train.Trainer object at 0x7f296e639dd0>
+
+  File "/home/cold/PaperReadFastly/模板代码/core/train.py", line 65, in train_in_epoch
+    self.after_epoch()
+    │    └ <function Trainer.after_epoch at 0x7f296e636170>
+    └ <core.train.Trainer object at 0x7f296e639dd0>
+
+  File "/home/cold/PaperReadFastly/模板代码/core/train.py", line 191, in after_epoch
+    self.evaluate_and_save_model()
+    │    └ <function Trainer.evaluate_and_save_model at 0x7f296e636440>
+    └ <core.train.Trainer object at 0x7f296e639dd0>
+
+  File "/home/cold/PaperReadFastly/模板代码/core/train.py", line 283, in evaluate_and_save_model
+    eval_loader = self.exp.eval_loader(batch_size=self.args.batch_size)
+                  │    │                          │    │    └ 64
+                  │    │                          │    └ Namespace(batch_size=64, cache=False, ckpt=None, devices=None, dist_backend='nccl', dist_url=None, exp_file=None, experiment_...
+                  │    │                          └ <core.train.Trainer object at 0x7f296e639dd0>
+                  │    └ ╒══════════════════╤════════════════════════════════════════════════════════════════╕
+                  │      │ keys             │ values            ...
+                  └ <core.train.Trainer object at 0x7f296e639dd0>
+
+AttributeError: 'Exp' object has no attribute 'eval_loader'

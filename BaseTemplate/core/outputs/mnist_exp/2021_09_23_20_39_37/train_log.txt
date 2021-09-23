@@ -1,0 +1,115 @@
+2021-09-23 20:39:37 | INFO     | core.train:114 - parser中接受到的参数列表: Namespace(batch_size=64, cache=False, ckpt='/home/cold/PaperReadFastly/BaseTemplate/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth', devices=None, dist_backend='nccl', dist_url=None, exp_file=None, experiment_name='mnist_exp', fp16=True, machine_rank=0, name=None, num_machines=1, opts=[], resume=False, start_epoch=None)
+2021-09-23 20:39:37 | INFO     | core.train:115 - 模型训练中 执行参数列表:
+╒══════════════════╤════════════════════════════╕
+│ keys             │ values                     │
+╞══════════════════╪════════════════════════════╡
+│ seed             │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ output_dir       │ './outputs'                │
+├──────────────────┼────────────────────────────┤
+│ print_interval   │ 10                         │
+├──────────────────┼────────────────────────────┤
+│ eval_interval    │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ num_classes      │ 80                         │
+├──────────────────┼────────────────────────────┤
+│ depth            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ width            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ data_num_workers │ 4                          │
+├──────────────────┼────────────────────────────┤
+│ input_size       │ (640, 640)                 │
+├──────────────────┼────────────────────────────┤
+│ multiscale_range │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ data_dir         │ None                       │
+├──────────────────┼────────────────────────────┤
+│ train_ann        │ 'instances_train2017.json' │
+├──────────────────┼────────────────────────────┤
+│ val_ann          │ 'instances_val2017.json'   │
+├──────────────────┼────────────────────────────┤
+│ mosaic_prob      │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ mixup_prob       │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ hsv_prob         │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ flip_prob        │ 0.5                        │
+├──────────────────┼────────────────────────────┤
+│ degrees          │ 10.0                       │
+├──────────────────┼────────────────────────────┤
+│ translate        │ 0.1                        │
+├──────────────────┼────────────────────────────┤
+│ mosaic_scale     │ (0.1, 2)                   │
+├──────────────────┼────────────────────────────┤
+│ mixup_scale      │ (0.5, 1.5)                 │
+├──────────────────┼────────────────────────────┤
+│ shear            │ 2.0                        │
+├──────────────────┼────────────────────────────┤
+│ perspective      │ 0.0                        │
+├──────────────────┼────────────────────────────┤
+│ enable_mixup     │ True                       │
+├──────────────────┼────────────────────────────┤
+│ warmup_epochs    │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ max_epoch        │ 100                        │
+├──────────────────┼────────────────────────────┤
+│ warmup_lr        │ 0                          │
+├──────────────────┼────────────────────────────┤
+│ basic_lr_per_img │ 0.00015625                 │
+├──────────────────┼────────────────────────────┤
+│ scheduler        │ 'warmcos'                  │
+├──────────────────┼────────────────────────────┤
+│ ema              │ True                       │
+├──────────────────┼────────────────────────────┤
+│ weight_decay     │ 0.0005                     │
+├──────────────────┼────────────────────────────┤
+│ momentum         │ 0.9                        │
+├──────────────────┼────────────────────────────┤
+│ exp_name         │ 'mnist_exp'                │
+├──────────────────┼────────────────────────────┤
+│ test_size        │ (28, 28)                   │
+├──────────────────┼────────────────────────────┤
+│ test_conf        │ 0.01                       │
+├──────────────────┼────────────────────────────┤
+│ nmsthre          │ 0.65                       │
+╘══════════════════╧════════════════════════════╛
+2021-09-23 20:39:37 | INFO     | core.train:119 - Model Summary: Params: 0.02M, Gflops: 0.00
+2021-09-23 20:39:38 | INFO     | core.train:273 - loading checkpoint for fine tuning
+2021-09-23 20:39:38 | INFO     | exp.mnist_exp:98 - 加载训练数据的配置信息.
+2021-09-23 20:39:39 | INFO     | data.datasets.mnist:55 - [=Dataset=>]  get trian dataset | data.shape:torch.Size([60000, 1, 28, 28]) | target.shape:torch.Size([60000]).
+2021-09-23 20:39:39 | INFO     | data.datasets.mnist:64 -               data: mean:35.11 | std:79.7 | max:255.0 | min:0.0
+2021-09-23 20:39:39 | INFO     | data.datasets.mnist:73 -               transform: mean:-0.8502 | std:0.4379 | max:1.0 | min:-1.0
+2021-09-23 20:39:39 | INFO     | data.data_sampler:86 - [=BatchSampler=>] batch_size:64 | drop_last:True | len:937.
+2021-09-23 20:39:39 | INFO     | core.train:133 - init prefetcher, this might take one minute or less...
+2021-09-23 20:39:39 | INFO     | data.data_utils:25 - [=DataLoader=>] worker_id:0 | seed:2212542380.
+2021-09-23 20:39:39 | INFO     | data.data_utils:25 - [=DataLoader=>] worker_id:1 | seed:1074981877.
+2021-09-23 20:39:40 | INFO     | core.train:163 - Training start...
+2021-09-23 20:39:40 | INFO     | core.train:164 - 
+Mnist_CNN(
+  (NeuralNetwork): NeuralNetwork(
+    (conv1): Conv2d(1, 10, kernel_size=(5, 5), stride=(1, 1))
+    (conv2): Conv2d(10, 20, kernel_size=(5, 5), stride=(1, 1))
+    (conv2_drop): Dropout2d(p=0.5, inplace=False)
+    (fc1): Linear(in_features=320, out_features=50, bias=True)
+    (fc2): Linear(in_features=50, out_features=10, bias=True)
+  )
+  (loss): CrossEntropyLoss()
+)
+2021-09-23 20:39:40 | INFO     | core.train:172 - ---> start train epoch1
+2021-09-23 20:39:40 | INFO     | core.train:230 - epoch: 1/100, iter: 10/937, mem: 4Mb, iter_time: 0.067s, data_time: 0.001s, loss: 0.1, lr: 2.134e-05, size: 640, ETA: 1:44:12
+2021-09-23 20:39:41 | INFO     | core.train:230 - epoch: 1/100, iter: 20/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.0, lr: 4.269e-05, size: 640, ETA: 1:38:22
+2021-09-23 20:39:42 | INFO     | core.train:230 - epoch: 1/100, iter: 30/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.1, lr: 6.403e-05, size: 640, ETA: 1:36:27
+2021-09-23 20:39:42 | INFO     | core.train:230 - epoch: 1/100, iter: 40/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.2, lr: 8.538e-05, size: 640, ETA: 1:35:27
+2021-09-23 20:39:43 | INFO     | core.train:230 - epoch: 1/100, iter: 50/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.2, lr: 1.067e-04, size: 640, ETA: 1:34:50
+2021-09-23 20:39:43 | INFO     | core.train:230 - epoch: 1/100, iter: 60/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.1, lr: 1.281e-04, size: 640, ETA: 1:34:26
+2021-09-23 20:39:44 | INFO     | core.train:230 - epoch: 1/100, iter: 70/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.1, lr: 1.494e-04, size: 640, ETA: 1:34:07
+2021-09-23 20:39:44 | INFO     | core.train:230 - epoch: 1/100, iter: 80/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.2, lr: 1.708e-04, size: 640, ETA: 1:33:53
+2021-09-23 20:39:45 | INFO     | core.train:230 - epoch: 1/100, iter: 90/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.2, lr: 1.921e-04, size: 640, ETA: 1:33:42
+2021-09-23 20:39:46 | INFO     | core.train:230 - epoch: 1/100, iter: 100/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.2, lr: 2.134e-04, size: 640, ETA: 1:33:34
+2021-09-23 20:39:46 | INFO     | core.train:230 - epoch: 1/100, iter: 110/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.1, lr: 2.348e-04, size: 640, ETA: 1:33:27
+2021-09-23 20:39:47 | INFO     | core.train:230 - epoch: 1/100, iter: 120/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.1, lr: 2.561e-04, size: 640, ETA: 1:33:21
+2021-09-23 20:39:47 | INFO     | core.train:230 - epoch: 1/100, iter: 130/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.2, lr: 2.775e-04, size: 640, ETA: 1:33:16
+2021-09-23 20:39:48 | INFO     | core.train:230 - epoch: 1/100, iter: 140/937, mem: 4Mb, iter_time: 0.059s, data_time: 0.001s, loss: 0.1, lr: 2.988e-04, size: 640, ETA: 1:33:13
+2021-09-23 20:39:49 | INFO     | core.train:168 - Training of experiment is done and the best AP is 0.00

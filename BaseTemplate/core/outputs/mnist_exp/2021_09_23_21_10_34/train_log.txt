@@ -1,0 +1,130 @@
+2021-09-23 21:10:34 | INFO     | core.eval:85 - parser中接受到的参数列表: Namespace(batch_size=64, ckpt='/home/cold/PaperReadFastly/BaseTemplate/core/outputs/mnist_exp/2021_09_23_18_06_42/latest_ckpt.pth', devices=None, dist_backend='nccl', dist_url=None, eval=True, exp_file=None, experiment_name='mnist_exp', fp16=True, name=None, opts=[], resume=True, start_epoch=None)
+2021-09-23 21:10:34 | INFO     | core.eval:86 - 模型训练中 执行参数列表:
+╒══════════════════╤════════════════════════════╕
+│ keys             │ values                     │
+╞══════════════════╪════════════════════════════╡
+│ seed             │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ output_dir       │ './outputs'                │
+├──────────────────┼────────────────────────────┤
+│ print_interval   │ 10                         │
+├──────────────────┼────────────────────────────┤
+│ eval_interval    │ 1                          │
+├──────────────────┼────────────────────────────┤
+│ num_classes      │ 80                         │
+├──────────────────┼────────────────────────────┤
+│ depth            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ width            │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ data_num_workers │ 4                          │
+├──────────────────┼────────────────────────────┤
+│ input_size       │ (640, 640)                 │
+├──────────────────┼────────────────────────────┤
+│ multiscale_range │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ data_dir         │ None                       │
+├──────────────────┼────────────────────────────┤
+│ train_ann        │ 'instances_train2017.json' │
+├──────────────────┼────────────────────────────┤
+│ val_ann          │ 'instances_val2017.json'   │
+├──────────────────┼────────────────────────────┤
+│ mosaic_prob      │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ mixup_prob       │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ hsv_prob         │ 1.0                        │
+├──────────────────┼────────────────────────────┤
+│ flip_prob        │ 0.5                        │
+├──────────────────┼────────────────────────────┤
+│ degrees          │ 10.0                       │
+├──────────────────┼────────────────────────────┤
+│ translate        │ 0.1                        │
+├──────────────────┼────────────────────────────┤
+│ mosaic_scale     │ (0.1, 2)                   │
+├──────────────────┼────────────────────────────┤
+│ mixup_scale      │ (0.5, 1.5)                 │
+├──────────────────┼────────────────────────────┤
+│ shear            │ 2.0                        │
+├──────────────────┼────────────────────────────┤
+│ perspective      │ 0.0                        │
+├──────────────────┼────────────────────────────┤
+│ enable_mixup     │ True                       │
+├──────────────────┼────────────────────────────┤
+│ warmup_epochs    │ 5                          │
+├──────────────────┼────────────────────────────┤
+│ max_epoch        │ 100                        │
+├──────────────────┼────────────────────────────┤
+│ warmup_lr        │ 0                          │
+├──────────────────┼────────────────────────────┤
+│ basic_lr_per_img │ 0.00015625                 │
+├──────────────────┼────────────────────────────┤
+│ scheduler        │ 'warmcos'                  │
+├──────────────────┼────────────────────────────┤
+│ ema              │ True                       │
+├──────────────────┼────────────────────────────┤
+│ weight_decay     │ 0.0005                     │
+├──────────────────┼────────────────────────────┤
+│ momentum         │ 0.9                        │
+├──────────────────┼────────────────────────────┤
+│ exp_name         │ 'mnist_exp'                │
+├──────────────────┼────────────────────────────┤
+│ test_size        │ (28, 28)                   │
+├──────────────────┼────────────────────────────┤
+│ test_conf        │ 0.01                       │
+├──────────────────┼────────────────────────────┤
+│ nmsthre          │ 0.65                       │
+╘══════════════════╧════════════════════════════╛
+2021-09-23 21:10:34 | INFO     | exp.mnist_exp:140 - 加载验证数据的配置信息.
+2021-09-23 21:10:34 | INFO     | data.datasets.mnist:55 - [=Dataset=>]  get eval dataset | data.shape:torch.Size([10000, 1, 28, 28]) | target.shape:torch.Size([10000]).
+2021-09-23 21:10:34 | INFO     | data.datasets.mnist:64 -               data: mean:23.54 | std:66.02 | max:255.0 | min:0.0
+2021-09-23 21:10:34 | INFO     | data.datasets.mnist:73 -               transform: mean:-0.8875 | std:0.3802 | max:1.0 | min:-1.0
+2021-09-23 21:10:34 | INFO     | data.data_sampler:86 - [=BatchSampler=>] batch_size:64 | drop_last:False | len:157.
+2021-09-23 21:10:34 | INFO     | data.data_utils:25 - [=DataLoader=>] worker_id:0 | seed:2640371299.
+2021-09-23 21:10:34 | INFO     | data.data_utils:25 - [=DataLoader=>] worker_id:1 | seed:934137634.
+2021-09-23 21:10:36 | INFO     | core.eval:93 - Model Summary: Params: 0.02M, Gflops: 0.00
+2021-09-23 21:10:36 | INFO     | core.eval:151 - resume training
+2021-09-23 21:10:36 | INFO     | core.eval:163 - loaded checkpoint 'True' 
+2021-09-23 21:10:36 | INFO     | core.eval:106 - Evaluating start...
+2021-09-23 21:10:36 | INFO     | core.eval:107 - 
+Mnist_CNN(
+  (NeuralNetwork): NeuralNetwork(
+    (conv1): Conv2d(1, 10, kernel_size=(5, 5), stride=(1, 1))
+    (conv2): Conv2d(10, 20, kernel_size=(5, 5), stride=(1, 1))
+    (conv2_drop): Dropout2d(p=0.5, inplace=False)
+    (fc1): Linear(in_features=320, out_features=50, bias=True)
+    (fc2): Linear(in_features=50, out_features=10, bias=True)
+  )
+  (loss): CrossEntropyLoss()
+)
+2021-09-23 21:10:37 | INFO     | core.eval:112 - Eavluating of experiment is done and the best loss is 0.00
+2021-09-23 21:10:37 | ERROR    | __main__:136 - An error has been caught in function '<module>', process 'MainProcess' (127328), thread 'MainThread' (140064807600512):
+Traceback (most recent call last):
+
+> File "launch.py", line 136, in <module>
+    evaler.eval()
+    │      └ <function Evaler.eval at 0x7f62f27c9e60>
+    └ <core.eval.Evaler object at 0x7f62f27d2710>
+
+  File "/home/cold/PaperReadFastly/BaseTemplate/core/eval.py", line 55, in eval
+    self.after_eval()
+    │    └ <function Evaler.after_eval at 0x7f62f27cd320>
+    └ <core.eval.Evaler object at 0x7f62f27d2710>
+
+  File "/home/cold/PaperReadFastly/BaseTemplate/core/eval.py", line 115, in after_eval
+    left_iters = self.max_iter_eval * self.max_epoch - (self.progress_in_iter + 1)
+                 │    │               │    │            │    └ <property object at 0x7f62f27c6770>
+                 │    │               │    │            └ <core.eval.Evaler object at 0x7f62f27d2710>
+                 │    │               │    └ 100
+                 │    │               └ <core.eval.Evaler object at 0x7f62f27d2710>
+                 │    └ 157
+                 └ <core.eval.Evaler object at 0x7f62f27d2710>
+
+  File "/home/cold/PaperReadFastly/BaseTemplate/core/eval.py", line 146, in progress_in_iter
+    return self.epoch * self.max_iter + self.iter
+           │            │               │    └ 156
+           │            │               └ <core.eval.Evaler object at 0x7f62f27d2710>
+           │            └ <core.eval.Evaler object at 0x7f62f27d2710>
+           └ <core.eval.Evaler object at 0x7f62f27d2710>
+
+AttributeError: 'Evaler' object has no attribute 'epoch'
