@@ -1,2 +1,0 @@
-https://www.kaggle.com/samtiz/notebookad42030536
-里边有疲劳驾驶的数据集和代码。

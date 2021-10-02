@@ -294,11 +294,13 @@ class Trainer:
     def save_ckpt(self, ckpt_name, update_best_ckpt=False):
         save_model = self.ema_model.ema if self.use_model_ema else self.model
         logger.info("Save weights to {}".format(self.file_name))
+
         ckpt_state = {
             "start_epoch": self.epoch + 1,
             "model": save_model.state_dict(),
             "optimizer": self.optimizer.state_dict(),
         }
+
         save_checkpoint(
             ckpt_state,
             update_best_ckpt,
